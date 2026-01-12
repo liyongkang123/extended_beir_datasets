@@ -1,7 +1,9 @@
 # Extended Beir Datasets
 This `Extended Beir Datasets` is derived from the original BEIR dataset download link: [https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/](https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/)
 
-On this basis, I have added new datasets (`msmarco_titled`, `trec_dl19`, `trec_dl20`) and maintained the same format as the original, making it more convenient for evaluation.
+On this basis, I have added new datasets (`msmarco_titled`, `trec_dl19`, `trec_dl20`, all datasets in `Bright`, `BrowseComp-Plus` ) and maintained the same format as the original, making it more convenient for evaluation.
+
+**Dataprocess details can be found under the ``Code`` folder.**
 
 ## :beers: Available Datasets (Extended)
 | Dataset                     | Website| BEIR-Name          | Public? | Type                             | Queries | Corpus | Rel D/Q | Down-load | md5 | Note|
@@ -9,7 +11,19 @@ On this basis, I have added new datasets (`msmarco_titled`, `trec_dl19`, `trec_d
 | MSMARCO Passage(with title) | [Homepage](https://microsoft.github.io/msmarco/)| ``msmarco_titled`` | ✅ | ``train``<br>``dev``<br>``test`` | 6,980   |  8.84M     | 1.1     | [Link](https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/msmarco.zip) | ``444067daf65d982533ea17ebd59501e4`` | From [Tevatron](https://huggingface.co/datasets/Tevatron/msmarco-passage-corpus) |
 | TREC-DL 19                  |  [Homepage](https://microsoft.github.io/msmarco/TREC-Deep-Learning-2019)| ``trec_dl19``     | ✅ | ``test``                         | 43      |  8.84M | 95.4    | [Link](https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/trec-covid.zip) | ``ce62140cb23feb9becf6270d0d1fe6d1`` |original, without passage title|
 | TREC-DL 20                  | [Homepage](https://microsoft.github.io/msmarco/TREC-Deep-Learning-2020.html) | ``trec_dl20``       | ✅ | ``test``                         | 54      |  8.84M     | 66.8    | [Link](https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/nfcorpus.zip) | ``a89dba18a62ef92f7d323ec890a0d38d`` |original, without passage title|
-
+| Biology | None| ``biology`` | ✅ | ``test``     | 103 | 57,359| 3.6 |None| None| only passage retrieval|
+| Earth Science | None| ``earth_science`` | ✅ | ``test``     | 116 | 121,249| 5.3 |None| None| only passage retrieval|
+| Economics | None| ``economics`` | ✅ | ``test``     | 103 | 50,220| 8.0 |None| None| only passage retrieval|
+| Psychology | None| ``psychology`` | ✅ | ``test``     | 101 | 52,835| 7.3 |None| None| only passage retrieval|
+| Robotics | None| ``robotics`` | ✅ | ``test``     | 101 | 61,961| 5.5 |None| None| only passage retrieval|
+| Stack Overflow | None| ``stack_overflow`` | ✅ | ``test``     | 117 | 107,081| 7.0 |None| None| only passage retrieval|
+| Sustainable Living | None| ``sustainable_living`` | ✅ | ``test``     | 108 | 60,792| 5.6 |None| None| only passage retrieval|
+| LeetCode | None| ``leetcode`` | ✅ | ``test``     | 142 | 413,932| 1.8 |None| None| only passage retrieval|
+| Pony | None| ``pony`` | ✅ | ``test``     | 112 | 7,894| 22.5 |None| None| only passage retrieval|
+| AoPS | None| ``aops`` | ✅ | ``test``     | 111 | 188,002| 4.7 |None| None| only passage retrieval|
+| TheoremQA-Q | None| ``theoremqa_questions`` | ✅ | ``test``     | 194 | 188,002| 3.2 |None| None| only passage retrieval|
+| TheoremQA-T | None| ``theoremqa_theorems`` | ✅ | ``test``     | 76 | 23,839| 2.0 |None| None| only passage retrieval|
+|BrowseComp-Plus|None| ``browsecomp_plus``| ✅ | ``golds``,``evidence`` | 830 |100,195| 6.1 , 2.9 | None| None| only passage retrieval|
 
 
 ## :beers: Available Datasets (Original)
