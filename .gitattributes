@@ -1,0 +1,24 @@
+# 默认自动检测文本文件，并在入库时统一转换为 LF
+* text=auto eol=lf
+
+# 明确指定代码与脚本强制使用 LF（防止在 Win 上拉取后，放到 Mac/Linux 运行报 \r 错误）
+*.sh text eol=lf
+*.py text eol=lf
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.md text eol=lf
+*.tex text eol=lf
+
+# Windows 专属脚本强制保持 CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# 声明二进制文件，防止 Git 误做换行符转换导致文件损坏
+*.png binary
+*.jpg binary
+*.pdf binary
+*.pt binary
+*.bin binary
+*.safetensors binary

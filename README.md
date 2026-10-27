@@ -1,7 +1,7 @@
 # Extended Beir Datasets
 This `Extended Beir Datasets` is derived from the original BEIR dataset download link: [https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/](https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/)
 
-On this basis, I have added new datasets (`msmarco_titled`, `trec_dl19`, `trec_dl20`, all datasets in `Bright`, `BrowseComp-Plus` ) and maintained the same format as the original, making it more convenient for evaluation.
+On this basis, I have added new datasets (`msmarco_titled`, `trec_dl19`, `trec_dl20`, all datasets in `Bright`, `BrowseComp-Plus`,`limit`,  `limit_small`, `limit_small_synonyms`) and maintained the same format as the original, making it more convenient for evaluation.
 
 **Dataprocess details can be found under the ``Code`` folder.**
 
@@ -25,6 +25,8 @@ On this basis, I have added new datasets (`msmarco_titled`, `trec_dl19`, `trec_d
 | TheoremQA-T | None| ``theoremqa_theorems`` | ✅ | ``test``     | 76      | 23,839  | 2.0       |None| None| only passage retrieval|
 |BrowseComp-Plus|None| ``browsecomp_plus``| ✅ | ``golds``,``evidence`` | 830     | 100,195 | 6.1 , 2.9 | None| None| only passage retrieval|
 | Limit   | None| ``limit`` | ✅ | ``test``     | 1,000   | 50,000  | 2.0       |None| None| only passage retrieval|
+| LIMIT-small | [Homepage](https://huggingface.co/datasets/orionweller/LIMIT-small)| ``limit_small`` | ✅ | ``test``     | 1,000   | 46      | 2.0       |None| None| only passage retrieval|
+| LIMIT-small-synonyms | [Homepage](https://huggingface.co/datasets/orionweller/LIMIT-small-synonyms)| ``limit_small_synonyms`` | ✅ | ``test``     | 1,000   | 46      | 2.0       |None| None| same queries and qrels as ``limit_small``; corpus attributes replaced by synonyms|
 
 ## :beers: Available Datasets (Original)
 
