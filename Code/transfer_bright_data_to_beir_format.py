@@ -1,8 +1,15 @@
 from datasets import load_dataset
 import json
 import os
+import zipfile
 import nltk
 from nltk.tokenize import word_tokenize
+
+# Hugging Face split names that differ from the BEIR dataset name in the README.
+# The zip and the folder inside it must use the BEIR name, same as limit_small.zip.
+BEIR_NAMES = {
+    "stackoverflow": "stack_overflow",
+}
 
 def count_words_nltk(text):
     """Count words using NLTK tokenizer"""
@@ -35,6 +42,8 @@ def transfer_bright_qrels_to_beir( hf_dataset, output_qrels_path ):
         return
 
     with open(output_qrels_path, "w", encoding="utf-8") as f:
+        # BEIR GenericDataLoader skips the first line as a header.
+        f.write("query-id\tcorpus-id\tscore\n")
         for item in hf_dataset:
             query_id = item["id"]
             if 'long' in output_qrels_path:
@@ -68,9 +77,27 @@ def transfer_bright_queries_to_beir( hf_dataset, output_queries_path ):
     print('query avg length:' ,sum(length)/len(length))
 
 
+def dataset_name(task):
+    return BEIR_NAMES.get(task, task)
+
+
+def zip_beir_dataset(folder_path, zip_path):
+    # Archive root is the dataset folder, e.g. biology/corpus.jsonl.
+    # BEIR download_and_unzip extracts into out_dir and expects that folder name.
+    with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+        for dirpath, _, filenames in os.walk(folder_path):
+            for filename in filenames:
+                if filename.startswith("."):
+                    continue
+                full_path = os.path.join(dirpath, filename)
+                arcname = os.path.relpath(full_path, os.path.dirname(folder_path))
+                zf.write(full_path, arcname.replace(os.sep, "/"))
+    print(f"Saved {zip_path}")
+
+
 def main():
-    # Get project root path (assuming script is executed from project root)
-    project_root = os.path.abspath(os.path.dirname(__file__))
+    # Write outside OneDrive. CloudStorage writes of the large jsonl files time out.
+    project_root = os.path.expanduser("~/Downloads")
 
     task_list =["biology","earth_science","economics","psychology","robotics","stackoverflow","sustainable_living","leetcode","pony","aops","theoremqa_theorems","theoremqa_questions"]
     long_task_list = ["biology","earth_science","economics","psychology","robotics","stackoverflow","sustainable_living","pony"]
@@ -80,15 +107,18 @@ def main():
         corpus = load_dataset('xlangai/bright', 'documents', )[task]
 
         '''Output paths'''
-        output_corpus_path = os.path.join(project_root, f"bright_data/{task}/corpus.jsonl")
-        output_queries_path = os.path.join(project_root, f"bright_data/{task}/queries.jsonl")
-        output_qrels_path = os.path.join(project_root, f"bright_data/{task}/qrels/test.tsv")
+        name = dataset_name(task)
+        task_dir = os.path.join(project_root, "bright_data", name)
+        output_corpus_path = os.path.join(task_dir, "corpus.jsonl")
+        output_queries_path = os.path.join(task_dir, "queries.jsonl")
+        output_qrels_path = os.path.join(task_dir, "qrels", "test.tsv")
+        zip_path = os.path.join(project_root, "bright_data", f"{name}.zip")
 
 
         if task in long_task_list:
-            output_corpus_long_path = os.path.join(project_root, f"bright_data/{task}/corpus_long.jsonl")
+            output_corpus_long_path = os.path.join(task_dir, "corpus_long.jsonl")
             corpus_long = load_dataset('xlangai/bright', 'long_documents', )[task]
-            output_qrels_long_path = os.path.join(project_root, f"bright_data/{task}/qrels/test_long.tsv")
+            output_qrels_long_path = os.path.join(task_dir, "qrels", "test_long.tsv")
         else:
             output_corpus_long_path = None
             corpus_long = None
@@ -104,6 +134,7 @@ def main():
         transfer_bright_queries_to_beir( query_data, output_queries_path )
         transfer_bright_qrels_to_beir( query_data, output_qrels_path )
         transfer_bright_qrels_to_beir( query_data, output_qrels_long_path )
+        zip_beir_dataset(task_dir, zip_path)
 
         print(query_data)
         print(corpus)
