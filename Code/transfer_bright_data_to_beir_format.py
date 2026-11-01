@@ -5,12 +5,6 @@ import zipfile
 import nltk
 from nltk.tokenize import word_tokenize
 
-# Hugging Face split names that differ from the BEIR dataset name in the README.
-# The zip and the folder inside it must use the BEIR name, same as limit_small.zip.
-BEIR_NAMES = {
-    "stackoverflow": "stack_overflow",
-}
-
 def count_words_nltk(text):
     """Count words using NLTK tokenizer"""
     tokens = word_tokenize(text.lower())
@@ -77,10 +71,6 @@ def transfer_bright_queries_to_beir( hf_dataset, output_queries_path ):
     print('query avg length:' ,sum(length)/len(length))
 
 
-def dataset_name(task):
-    return BEIR_NAMES.get(task, task)
-
-
 def zip_beir_dataset(folder_path, zip_path):
     # Archive root is the dataset folder, e.g. biology/corpus.jsonl.
     # BEIR download_and_unzip extracts into out_dir and expects that folder name.
@@ -107,12 +97,11 @@ def main():
         corpus = load_dataset('xlangai/bright', 'documents', )[task]
 
         '''Output paths'''
-        name = dataset_name(task)
-        task_dir = os.path.join(project_root, "bright_data", name)
+        task_dir = os.path.join(project_root, "bright_data", task)
         output_corpus_path = os.path.join(task_dir, "corpus.jsonl")
         output_queries_path = os.path.join(task_dir, "queries.jsonl")
         output_qrels_path = os.path.join(task_dir, "qrels", "test.tsv")
-        zip_path = os.path.join(project_root, "bright_data", f"{name}.zip")
+        zip_path = os.path.join(project_root, "bright_data", f"{task}.zip")
 
 
         if task in long_task_list:

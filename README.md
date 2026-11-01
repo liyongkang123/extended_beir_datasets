@@ -16,7 +16,7 @@ On this basis, I have added new datasets (`msmarco_titled`, `trec_dl19`, `trec_d
 | Economics | None| ``economics`` | ✅ | ``test``     | 103     | 50,220  | 8.0       |None| None| only passage retrieval|
 | Psychology | None| ``psychology`` | ✅ | ``test``     | 101     | 52,835  | 7.3       |None| None| only passage retrieval|
 | Robotics | None| ``robotics`` | ✅ | ``test``     | 101     | 61,961  | 5.5       |None| None| only passage retrieval|
-| Stack Overflow | None| ``stack_overflow`` | ✅ | ``test``     | 117     | 107,081 | 7.0       |None| None| only passage retrieval|
+| Stack Overflow | None| ``stackoverflow`` | ✅ | ``test``     | 117     | 107,081 | 7.0       |None| None| only passage retrieval|
 | Sustainable Living | None| ``sustainable_living`` | ✅ | ``test``     | 108     | 60,792  | 5.6       |None| None| only passage retrieval|
 | LeetCode | None| ``leetcode`` | ✅ | ``test``     | 142     | 413,932 | 1.8       |None| None| only passage retrieval|
 | Pony | None| ``pony`` | ✅ | ``test``     | 112     | 7,894   | 22.5      |None| None| only passage retrieval|
